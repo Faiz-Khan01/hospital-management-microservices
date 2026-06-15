@@ -1,52 +1,62 @@
 # hospital-management-microservices
-Full Stack Hospital Management System built using Spring Boot Microservices, React, and MySQL
-
-👇
 
 🏥 Hospital Management System (Microservices Architecture)
 
 A scalable full-stack Hospital Management System built using Spring Boot Microservices, React, and MySQL.
-Designed to handle hospital workflows like patients, doctors, appointments, prescriptions, and billing with secure authentication.
+Designed to manage hospital operations like patients, doctors, appointments, prescriptions, and billing with secure authentication.
 
 ⚙️ Tech Stack
-
-Frontend:
-
+💻 Frontend
 React
 Vite
 Axios
 Tailwind CSS
 
-Backend:
 
+🔧 Backend
 Java
 Spring Boot
 Spring Cloud (Gateway, Eureka, OpenFeign)
 JWT Authentication
 
-Database:
+
+🗄️ Database
 MySQL
 
 
-🏗️ Microservices
+🏗️ Microservices Architecture
 🏥 Patient Service – Manage patient records
 🧑‍⚕️ Doctor Service – Doctor profiles & availability
 📅 Appointment Service – Booking system
 💊 Prescription Service – Digital prescriptions
-💳 Billing Service – Payment & invoices
+💳 Billing Service – Payments & invoices
 🔐 Auth Service – Login & role-based access
 
 
-🌐 Architecture
-API Gateway as single entry point
-Eureka for service discovery
-OpenFeign for inter-service communication
-JWT-based secure authentication
+🌐 System Design
+API Gateway → Single entry point for all requests
+Eureka Server → Service discovery
+OpenFeign → Inter-service communication
+JWT → Secure authentication & authorization
 
 
 🚀 Features
-Role-based login (Admin / Doctor / Patient)
-Microservices-based scalable design
+Role-based login system (Admin / Doctor / Patient)
+Microservices-based architecture
 Secure REST APIs
 Real-time appointment management
-Modular architecture
+Modular and scalable design
+
+
+📈 Project Highlights
+Clean microservices separation
+Secure authentication system
+Scalable cloud-ready architecture
+Frontend + Backend integration
+
+
+👨‍💻 Author
+Faiz Khan
+
+
+💬 Open to feedback and collaboration
