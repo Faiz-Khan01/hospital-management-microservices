@@ -1,0 +1,83 @@
+server:
+  port: 8080  # API Gateway runs on port 8080
+
+spring:
+  application:
+    name: API-GATEWAY  # Service name registered in Eureka
+
+  cloud:
+    config:
+      enabled: false  # Disable Spring Cloud Config Server
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # Enable dynamic routing via Eureka
+          lower-case-service-id: true  # Convert service IDs to lowercase
+
+      # 🌐 Centralized CORS configuration for all routes
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"  # Frontend (React/Vite)
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+      # 🔧 Removes duplicate CORS headers to avoid conflicts
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_FIRST
+
+      routes:
+        # 🔐 Auth Service Route (handles authentication requests)
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/v1/auth/**
+
+        # 👤 Patient Service Route
+        - id: patient-service
+          uri: lb://patient-service
+          predicates:
+            - Path=/api/v1/patients/**
+
+        # 🩺 Doctor Service Route
+        - id: doctor-service
+          uri: lb://doctor-service
+          predicates:
+            - Path=/api/v1/doctors/**
+
+        # 📅 Appointment Service Route
+        - id: appointment-service
+          uri: lb://appointment-service
+          predicates:
+            - Path=/api/v1/appointments/**
+
+        # 💳 Billing Service Route
+        - id: billing-service
+          uri: lb://billing-service
+          predicates:
+            - Path=/api/v1/billing/**
+
+        # 💊 Prescription Service Route
+        - id: prescription-service
+          uri: lb://prescription-service
+          predicates:
+            - Path=/api/v1/prescriptions/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Eureka Server URL
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE  # Gateway request tracing
+    org.springframework.http.server.reactive: DEBUG  # HTTP request debugging
+    reactor.netty: DEBUG  # Netty reactive network logs
